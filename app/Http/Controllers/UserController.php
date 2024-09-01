@@ -36,7 +36,7 @@ class UserController extends Controller
             'name' => $req->get('name'),
             'email' => $req->get('email'),
             'password' => Hash::make($req->get('password')),
-            'profile' => $profileImage
+            'profile' => $profileImage,
         ]);
         if ($user->save()) {
             return ApiResponse::success($user, 'User registered successfully');
@@ -62,7 +62,6 @@ class UserController extends Controller
 
         $user->update($request->only('name', 'email', 'password'));
 
-
         if ($request->hasFile('profile')) {
             if ($user->profile != null) {
                 Storage::delete($user->profile);
@@ -76,7 +75,6 @@ class UserController extends Controller
 
         return ApiResponse::success($user, 'User updated successfully');
     }
-
 
     public function logout(Request $req): JsonResponse
     {
@@ -99,6 +97,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $user = User::where('id', Auth::user()->id)->first();
             $token = $user->createToken('user-token')->plainTextToken;
+
             return response()->json([
                 'success' => true,
                 'message' => 'login successfully',
@@ -115,7 +114,7 @@ class UserController extends Controller
         if ($id === null) {
             $authUser = auth()->user();
 
-            if (!$authUser) {
+            if (! $authUser) {
                 return ApiResponse::error('Unauthorized', [], 401);
             }
 
@@ -125,9 +124,10 @@ class UserController extends Controller
             $user = User::with('reviews')->find($id);
 
         }
-        if (!$user) {
+        if (! $user) {
             return ApiResponse::error('User not found');
         }
+
         return ApiResponse::success($user, 'Success get user profile with reviewed destinations');
     }
 }
