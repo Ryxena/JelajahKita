@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Destination extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        "name",
+        'name',
         'description',
         'province',
-        'city'
+        'city',
     ];
+
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);

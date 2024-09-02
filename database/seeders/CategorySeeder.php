@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
             ['name' => 'Historical'],
             ['name' => 'Adventure'],
             ['name' => 'Cultural'],
-            ['name' => 'Urban']
+            ['name' => 'Urban'],
         ];
 
         foreach ($categories as $category) {

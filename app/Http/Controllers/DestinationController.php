@@ -7,7 +7,6 @@ use App\Models\Destination;
 use App\Models\ImageDestination;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class DestinationController extends Controller
@@ -20,7 +19,7 @@ class DestinationController extends Controller
         $query = Destination::with(['images:destination_id,path', 'reviews', 'categories']);
 
         if ($search) {
-            $query->whereAny(['name', 'description', 'province', 'city'], 'like', $search)->orWhereHas('categories', function($categoryQuery) use ($search) {
+            $query->whereAny(['name', 'description', 'province', 'city'], 'like', $search)->orWhereHas('categories', function ($categoryQuery) use ($search) {
                 $categoryQuery->where('name', 'like', "%{$search}%");
             });
         }
@@ -52,7 +51,7 @@ class DestinationController extends Controller
             'city' => 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return ApiResponse::error('Validation error', $validator->errors());
         }
         $destination = Destination::create($request->only('name', 'description', 'province', 'city'));
@@ -65,37 +64,40 @@ class DestinationController extends Controller
                 ]);
             }
         }
+
         return ApiResponse::success($destination, 'Destination created');
     }
 
     public function update(Request $request, $id)
     {
         $destination = Destination::where('id', $id)->first();
-        if (!$destination) {
+        if (! $destination) {
             return ApiResponse::error('Destination not found');
         }
         $validator = Validator::make($request->all(), [
-            "name" => "nullable|string|min:5",
-            "description" => "nullable|string|min:10"
+            'name' => 'nullable|string|min:5',
+            'description' => 'nullable|string|min:10',
         ]);
-        if($validator->fails()){
+        if ($validator->fails()) {
             return ApiResponse::error('Validation error', $validator->errors());
         }
         $destination->update($request->only('name', 'description', 'province', 'city'));
         if ($request->has('category_ids')) {
             $destination->categories()->sync($request->category_ids);
         }
+
         return ApiResponse::success($destination, 'Destination updated');
     }
 
     public function delete(Request $request, $id)
     {
         $destination = Destination::where('id', $id)->first();
-        if(!$destination){
+        if (! $destination) {
             return ApiResponse::error('Destination not found');
         }
         $destination->delete();
-        return ApiResponse::success(null,'Destination deleted');
+
+        return ApiResponse::success(null, 'Destination deleted');
     }
 
     public function show($id)
@@ -110,7 +112,8 @@ class DestinationController extends Controller
                 unset($category->pivot);
             })->makeHidden(['created_at', 'updated_at']);
 
-        });;
+        });
+
         return ApiResponse::success($destination, 'Destination found');
     }
 }

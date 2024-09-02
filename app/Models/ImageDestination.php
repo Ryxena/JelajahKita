@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ImageDestination extends Model
 {
     use HasFactory;
+
     protected $table = 'image_destinations';
+
     protected $fillable = [
         'destination_id',
         'path',
@@ -19,5 +21,4 @@ class ImageDestination extends Model
     {
         return $this->belongsTo(Destination::class);
     }
-
 }
