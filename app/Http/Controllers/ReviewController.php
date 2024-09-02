@@ -13,6 +13,7 @@ class ReviewController extends Controller
     public function index(): JsonResponse
     {
         $reviews = Review::with(['destination', 'user'])->get();
+
         return ApiResponse::success($reviews, 'Success get all reviews');
     }
 
@@ -20,9 +21,9 @@ class ReviewController extends Controller
     {
         $user = auth()->user();
         $validator = Validator::make($request->all(), [
-            "destination_id" => "required|exists:destinations,id",
-            "rating" => "required|integer|min:1|max:5",
-            "review" => "required|string|min:10",
+            'destination_id' => 'required|exists:destinations,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'review' => 'required|string|min:10',
         ]);
 
         if ($validator->fails()) {
@@ -43,13 +44,13 @@ class ReviewController extends Controller
     {
         $review = Review::find($id);
 
-        if (!$review) {
+        if (! $review) {
             return ApiResponse::error('Review not found');
         }
 
         $validator = Validator::make($request->all(), [
-            "rating" => "sometimes|required|integer|min:1|max:5",
-            "review" => "sometimes|required|string|min:10",
+            'rating' => 'sometimes|required|integer|min:1|max:5',
+            'review' => 'sometimes|required|string|min:10',
         ]);
 
         if ($validator->fails()) {
@@ -65,7 +66,7 @@ class ReviewController extends Controller
     {
         $review = Review::find($id);
 
-        if (!$review) {
+        if (! $review) {
             return ApiResponse::error('Review not found');
         }
 
