@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\ImageDestination;
+use Illuminate\Database\Seeder;
 
 class ImageDestinationSeeder extends Seeder
 {
@@ -13,57 +13,57 @@ class ImageDestinationSeeder extends Seeder
             // Bali Beach Images
             [
                 'destination_id' => 1,
-                'path' => 'destinations/bali-beach-1.jpg'
+                'path' => 'destinations/bali-beach-1.jpg',
             ],
             [
                 'destination_id' => 1,
-                'path' => 'destinations/bali-beach-2.jpg'
+                'path' => 'destinations/bali-beach-2.jpg',
             ],
             [
                 'destination_id' => 1,
-                'path' => 'destinations/bali-beach-3.jpg'
+                'path' => 'destinations/bali-beach-3.jpg',
             ],
 
             // Jakarta Old Town Images
             [
                 'destination_id' => 2,
-                'path' => 'destinations/jakarta-oldtown-1.jpg'
+                'path' => 'destinations/jakarta-oldtown-1.jpg',
             ],
             [
                 'destination_id' => 2,
-                'path' => 'destinations/jakarta-oldtown-2.jpg'
+                'path' => 'destinations/jakarta-oldtown-2.jpg',
             ],
             [
                 'destination_id' => 2,
-                'path' => 'destinations/jakarta-oldtown-3.jpg'
+                'path' => 'destinations/jakarta-oldtown-3.jpg',
             ],
 
             // Mount Rinjani Images
             [
                 'destination_id' => 3,
-                'path' => 'destinations/rinjani-1.jpg'
+                'path' => 'destinations/rinjani-1.jpg',
             ],
             [
                 'destination_id' => 3,
-                'path' => 'destinations/rinjani-2.jpg'
+                'path' => 'destinations/rinjani-2.jpg',
             ],
             [
                 'destination_id' => 3,
-                'path' => 'destinations/rinjani-3.jpg'
+                'path' => 'destinations/rinjani-3.jpg',
             ],
 
             // Yogyakarta Palace Images
             [
                 'destination_id' => 4,
-                'path' => 'destinations/yogyakarta-palace-1.jpg'
+                'path' => 'destinations/yogyakarta-palace-1.jpg',
             ],
             [
                 'destination_id' => 4,
-                'path' => 'destinations/yogyakarta-palace-2.jpg'
+                'path' => 'destinations/yogyakarta-palace-2.jpg',
             ],
             [
                 'destination_id' => 4,
-                'path' => 'destinations/yogyakarta-palace-3.jpg'
+                'path' => 'destinations/yogyakarta-palace-3.jpg',
             ],
         ];
 
