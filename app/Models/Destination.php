@@ -16,6 +16,8 @@ class Destination extends Model
         'description',
         'province',
         'city',
+        'budget',
+        'facility'
     ];
 
     public function reviews(): HasMany

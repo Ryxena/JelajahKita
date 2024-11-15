@@ -49,12 +49,14 @@ class DestinationController extends Controller
             'description' => 'required|string|min:10',
             'province' => 'required|string',
             'city' => 'required|string',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
+            'budget' => 'required|integer',
+            'facility' => 'required|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         if ($validator->fails()) {
             return ApiResponse::error('Validation error', $validator->errors());
         }
-        $destination = Destination::create($request->only('name', 'description', 'province', 'city'));
+        $destination = Destination::create($request->only('name', 'description', 'province', 'city', 'budget', 'facility'));
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $imageFile) {
                 $path = $imageFile->store('destinations', 'public');

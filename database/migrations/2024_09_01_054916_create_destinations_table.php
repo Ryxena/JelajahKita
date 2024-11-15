@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('province');
+            $table->integer('budget');
+            $table->string('facility');
             $table->string('city');
             $table->timestamps();
         });

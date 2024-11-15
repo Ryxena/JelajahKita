@@ -65,7 +65,6 @@ class ReviewController extends Controller
     public function delete($id): JsonResponse
     {
         $review = Review::find($id);
-
         if (! $review) {
             return ApiResponse::error('Review not found');
         }
