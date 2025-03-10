@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ApiResponse;
 use App\Models\Destination;
+use App\Helpers\ApiResponse;
+use Illuminate\Http\Request;
 use App\Models\ImageDestination;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class DestinationController extends Controller
@@ -15,12 +15,20 @@ class DestinationController extends Controller
     {
         $search = $request->query('search');
         $sort = $request->query('sort', 'asc');
+        $categoryId = $request->query('categories');
 
         $query = Destination::with(['images:destination_id,path', 'reviews', 'categories']);
 
         if ($search) {
-            $query->whereAny(['name', 'description', 'province', 'city'], 'like', $search)->orWhereHas('categories', function ($categoryQuery) use ($search) {
-                $categoryQuery->where('name', 'like', "%{$search}%");
+            $query->whereAny(['name', 'description', 'province', 'city'], 'like', $search)
+                ->orWhereHas('categories', function ($categoryQuery) use ($search) {
+                    $categoryQuery->where('name', 'like', "%{$search}%");
+                });
+        }
+
+        if ($categoryId) {
+            $query->whereHas('categories', function ($categoryQuery) use ($categoryId) {
+                $categoryQuery->where('id', $categoryId);
             });
         }
 
@@ -36,11 +44,11 @@ class DestinationController extends Controller
                 $destination->categories->each(function ($category) {
                     unset($category->pivot);
                 })->makeHidden(['created_at', 'updated_at']);
-
             });
 
         return ApiResponse::success($destinations, 'Success get all destinations');
     }
+
 
     public function create(Request $request): JsonResponse
     {
