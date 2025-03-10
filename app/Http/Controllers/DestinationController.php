@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Destination;
 use App\Helpers\ApiResponse;
-use Illuminate\Http\Request;
+use App\Models\Destination;
 use App\Models\ImageDestination;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class DestinationController extends Controller
