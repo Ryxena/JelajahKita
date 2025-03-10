@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Destination;
 use App\Helpers\ApiResponse;
-use Illuminate\Http\Request;
+use App\Models\Destination;
 use App\Models\ImageDestination;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class DestinationController extends Controller
@@ -48,7 +48,6 @@ class DestinationController extends Controller
 
         return ApiResponse::success($destinations, 'Success get all destinations');
     }
-
 
     public function create(Request $request): JsonResponse
     {
