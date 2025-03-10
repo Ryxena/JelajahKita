@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ApiResponse;
 use App\Models\Destination;
+use App\Helpers\ApiResponse;
+use Illuminate\Http\Request;
 use App\Models\ImageDestination;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class DestinationController extends Controller
@@ -28,7 +28,7 @@ class DestinationController extends Controller
 
         if ($categoryId) {
             $query->whereHas('categories', function ($categoryQuery) use ($categoryId) {
-                $categoryQuery->where('id', $categoryId);
+                $categoryQuery->where('categories.id', $categoryId);
             });
         }
 
